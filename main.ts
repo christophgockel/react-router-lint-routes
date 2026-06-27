@@ -8,16 +8,18 @@ import { createRouteMatcher, extractPaths } from "./src/route-matching.ts";
 
 const DEFAULT_DIRECTORY = "app";
 const DEFAULT_TSCONFIG = "tsconfig.json";
-const DEFAULT_EXCLUDE: string[] = [];
+const DEFAULT_EXCLUDE = ["routes.ts"];
 
 const { values } = parseArgs({
   options: {
     directory: { type: "string", default: DEFAULT_DIRECTORY },
     tsconfig: { type: "string", default: DEFAULT_TSCONFIG },
-    exclude: { type: "string", multiple: true, default: DEFAULT_EXCLUDE },
+    exclude: { type: "string", multiple: true },
     help: { type: "boolean", default: false },
   },
 });
+
+const excludedFiles = [...DEFAULT_EXCLUDE, ...(values.exclude ?? [])];
 
 if (values.help) {
   console.log(`Usage: react-router-lint-routes [options]
@@ -25,7 +27,7 @@ if (values.help) {
 Options:
   --directory <path>  Directory to lint (default: ${DEFAULT_DIRECTORY})
   --tsconfig <file>   TypeScript config file (default: ${DEFAULT_TSCONFIG})
-  --exclude <file>    Files to skip, repeatable (default: none)
+  --exclude <file>    Files to skip, path relative to --directory (default: routes.ts)
   --help              Show this help`);
 
   process.exit(0);
@@ -35,6 +37,12 @@ Options:
 const toForwardSlash = (p: string) => p.replaceAll("\\", "/");
 const projectRoot = toForwardSlash(process.cwd());
 const directory = toForwardSlash(join(projectRoot, values.directory));
+
+console.log(`Scanning ${values.directory}/ using ${values.tsconfig}`);
+
+if (excludedFiles.length > 0) {
+  console.log(`Excluding: ${excludedFiles.map((f) => `${values.directory}/${f}`).join(", ")}`);
+}
 
 // Fetch existing routes
 let routeJson: string;
@@ -64,7 +72,7 @@ const parsedConfig = ts.parseJsonConfigFileContent(configFile.config, ts.sys, pr
 const program = ts.createProgram(parsedConfig.fileNames, parsedConfig.options);
 
 // Find and report violations
-const violations = findViolations(program, matchesRoute, directory, values.exclude);
+const violations = findViolations(program, matchesRoute, directory, excludedFiles);
 
 if (violations.length > 0) {
   console.log(

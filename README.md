@@ -54,9 +54,12 @@ The known routes are fetched from `npx react-router routes --json` at lint time 
 ```
 --directory <path>  Directory to lint (default: app)
 --tsconfig <file>   TypeScript config file (default: tsconfig.json)
---exclude <file>    Files to skip, repeatable
+--exclude <file>    Files to skip, path relative to --directory, repeatable (default: routes.ts)
 --help              Show help
 ```
+
+`routes.ts` is excluded by default because it contains route declarations, not navigation targets.
+Paths are relative to the scan directory, so `--exclude path/to/config.ts` skips `app/path/to/config.ts`.
 
 ### Examples
 
@@ -67,8 +70,8 @@ npx react-router-lint-routes --directory src
 # Use a custom tsconfig
 npx react-router-lint-routes --tsconfig tsconfig.app.json
 
-# Exclude the route definition file
-npx react-router-lint-routes --exclude routes.ts
+# Exclude additional files
+npx react-router-lint-routes --exclude routes.ts --exclude legacy-links.ts
 ```
 
 For ease of use add it as a script in `package.json`:
@@ -76,7 +79,7 @@ For ease of use add it as a script in `package.json`:
 ```json
 {
   "scripts": {
-    "lint:routes": "react-router-lint-routes --exclude routes.ts"
+    "lint:routes": "react-router-lint-routes"
   }
 }
 ```
@@ -87,7 +90,7 @@ Then simply invoke it with
 npm run lint:routes
 ```
 
-without having to specify your project settings every time.
+without having to specify your project-specific settings every time.
 
 
 ## How it works
