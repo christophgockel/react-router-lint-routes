@@ -14,6 +14,12 @@
   "bin": {
     "react-router-lint-routes": "main.ts"
   },
+  "files": [
+    "src/",
+    "LICENSE",
+    "main.ts",
+    "README.md"
+  ],
   "engines": {
     "node": ">=23.6.0"
   },
