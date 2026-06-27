@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-06-27
+
 ### Added
 
 - CLI tool to lint route paths for missing `href()` usage
@@ -18,3 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `--exclude` option to skip files, additive with the default exclusion of `routes.ts`
 - CLI output showing effective scan settings (directory, tsconfig, excluded files)
 - Runtime guard in `extractPaths` to detect changes in React Router's JSON output shape
+
+
+## Links
+
+[1.0.0]: https://github.com/christophgockel/react-router-lint-routes/releases/tag/v1.0.0
