@@ -22,13 +22,15 @@
     "lint:fix": "biome check --write",
     "lint:ci": "biome ci --error-on-warnings",
     "start": "node main.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "typecheck": "tsc"
+    "test": "vitest",
+    "typecheck": "tsc",
+    "verify": "npm run lint && npm run typecheck && npm run test"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.1",
     "@types/node": "^24.13.2",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
   },
   "peerDependencies": {
     "react-router": ">=7.0.0",
