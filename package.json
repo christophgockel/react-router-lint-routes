@@ -21,7 +21,7 @@
     "README.md"
   ],
   "engines": {
-    "node": ">=23.6.0"
+    "node": ">=24.16.0"
   },
   "scripts": {
     "lint": "biome check --error-on-warnings",
