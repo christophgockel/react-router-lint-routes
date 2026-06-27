@@ -9,6 +9,7 @@
     "noEmit": true,
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
+    "allowImportingTsExtensions": true,
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
