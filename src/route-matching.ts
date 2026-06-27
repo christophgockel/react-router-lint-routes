@@ -29,8 +29,10 @@ export function extractPaths(routes: Route[]): string[] {
 }
 
 export function createRouteMatcher(allRoutes: string[]) {
-  // "/" is excluded: href("/") returns "/" unchanged, so wrapping it adds no type-safety.
-  // It would also flag perfectly fine uses like <Link to="/#features">.
+  // "/" is excluded: it appears frequently in non-route contexts (path construction, URL
+  // manipulation) where flagging it would produce false positives.
+  // It also cannot be renamed the way other routes can, so href("/") provides minimal
+  // type-safety benefit in practice.
   const staticRoutes = new Set(allRoutes.filter((r) => !r.includes(":") && r !== "/"));
 
   // For parameterised routes like /products/:id, extract the fixed prefix before the
