@@ -1,0 +1,31 @@
+{
+  "name": "react-router-lint-routes",
+  "version": "0.1.0",
+  "description": "Lint route paths to enforce type-safe href() usage in React Router 7 projects",
+  "keywords": [
+    "react-router",
+    "lint",
+    "href",
+    "type-safe"
+  ],
+  "license": "MIT",
+  "author": "Christoph Gockel",
+  "type": "module",
+  "bin": {
+    "react-router-lint-routes": "main.ts"
+  },
+  "engines": {
+    "node": ">=23.6.0"
+  },
+  "scripts": {
+    "start": "node main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "react-router": ">=7.0.0",
+    "typescript": ">=5.8.0"
+  }
+}
