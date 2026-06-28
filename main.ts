@@ -79,9 +79,14 @@ if (violations.length > 0) {
     `\nFound ${violations.length} route path(s) not wrapped in href(). Use href() from react-router instead:\n`,
   );
 
-  for (const v of violations) {
-    console.log(`  ${v.file}:${v.line}`);
-    console.log(`    ${v.text}\n`);
+  const grouped = Map.groupBy(violations, (v) => v.file);
+
+  for (const [file, fileViolations] of grouped) {
+    console.log(`  ${file}`);
+    for (const v of fileViolations) {
+      console.log(`    Line ${v.line}: ${v.text}`);
+    }
+    console.log();
   }
 
   process.exit(1);

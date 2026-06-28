@@ -8,6 +8,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- CLI output: violations are now grouped by file instead of repeating the file name for each violation.
+  Each file appears once, with its violations listed below it.
+
+  Before:
+
+  ```
+  src/foo.tsx:5
+      "/users"
+
+  src/foo.tsx:12
+      "/users/:id"
+  ```
+
+  After:
+
+  ```
+  src/foo.tsx
+      Line 5: "/users"
+      Line 12: "/users/:id"
+  ```
+
+
 ## [1.0.0] - 2026-06-27
 
 ### Added
