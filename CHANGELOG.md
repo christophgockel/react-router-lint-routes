@@ -8,9 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-06-28
+
 ### Fixed
 
-  - Added missing `repository` field in package.json required for npm publishing.
+- Added missing `repository` field in package.json required for npm publishing.
 
 
 ## [1.1.0] - 2026-06-28
@@ -53,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Runtime guard in `extractPaths` to detect changes in React Router's JSON output shape
 
 
-[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.1.1...HEAD
+[1.1.1]: https://github.com/christophgockel/react-router-lint-routes/releases/tag/1.1.0...1.1.1
 [1.1.0]: https://github.com/christophgockel/react-router-lint-routes/releases/tag/1.0.0...1.1.0
 [1.0.0]: https://github.com/christophgockel/react-router-lint-routes/releases/tag/1.0.0
