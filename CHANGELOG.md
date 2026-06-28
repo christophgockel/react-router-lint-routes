@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+  - Added missing `repository` field in package.json required for npm publishing.
+
+
 ## [1.1.0] - 2026-06-28
 
 ### Changed
