@@ -27,7 +27,7 @@ const path = "/products/" + id;       // flagged
 
 ## Requirements
 
-- Node.js >= 23.6.0 (native TypeScript execution)
+- Node.js >= 24.16.0
 - React Router >= 7.0.0
 - TypeScript >= 5.8.0
 
