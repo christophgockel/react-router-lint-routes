@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-28
+
 ### Changed
 
 - CLI output: violations are now grouped by file instead of repeating the file name for each violation.
@@ -46,6 +48,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Runtime guard in `extractPaths` to detect changes in React Router's JSON output shape
 
 
-## Links
-
-[1.0.0]: https://github.com/christophgockel/react-router-lint-routes/releases/tag/v1.0.0
+[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.0.0...HEAD
+[1.1.0]: https://github.com/christophgockel/react-router-lint-routes/releases/tag/1.0.0...1.1.0
+[1.0.0]: https://github.com/christophgockel/react-router-lint-routes/releases/tag/1.0.0
