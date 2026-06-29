@@ -4,7 +4,8 @@ import { resolve } from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 
 const fixturePath = resolve(import.meta.dirname, "fixture");
-const cliPath = resolve(import.meta.dirname, "../../main.ts");
+const projectRoot = resolve(import.meta.dirname, "../..");
+const cliPath = resolve(projectRoot, "dist/main.js");
 
 function runCli(...args: string[]) {
   return spawnSync("node", [cliPath, ...args], {
@@ -15,6 +16,8 @@ function runCli(...args: string[]) {
 
 describe("End-to-End Tests", () => {
   beforeAll(() => {
+    execSync("npm run build", { cwd: projectRoot, stdio: "pipe" });
+
     if (!existsSync(resolve(fixturePath, "node_modules"))) {
       execSync("npm ci", { cwd: fixturePath, stdio: "pipe" });
     }
