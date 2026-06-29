@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- The package is now shipping compiled JavaScript instead of raw TypeScript sources.
+  Fixes the error:
+
+  ```
+  Error [ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING]: Stripping types is currently unsupported for files under node_modules,
+  ```
+
+  This was an issue on my part thinking that Node's feature of stripping types would already work for dependencies.
+
+
 ## [1.1.1] - 2026-06-28
 
 ### Fixed

@@ -16,21 +16,22 @@
   "author": "Christoph Gockel",
   "type": "module",
   "bin": {
-    "react-router-lint-routes": "main.ts"
+    "react-router-lint-routes": "dist/main.js"
   },
   "files": [
-    "src/",
+    "dist/",
     "LICENSE",
-    "main.ts",
     "README.md"
   ],
   "engines": {
     "node": ">=24.16.0"
   },
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "lint": "biome check --error-on-warnings",
     "lint:fix": "biome check --write",
     "lint:ci": "biome ci --error-on-warnings",
+    "prepublishOnly": "npm run build",
     "start": "node main.ts",
     "test": "vitest",
     "typecheck": "tsc",
