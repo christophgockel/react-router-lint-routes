@@ -35,9 +35,11 @@ describe("End-to-End Tests", () => {
     expect(result.stdout).toContain("`/products/${id}`");
     expect(result.stdout).toContain('"/products/" + id');
 
-    // Only the violations.ts file is reported as a violation, not routes.ts (excluded by default)
-    expect(result.stdout).toContain("app/violations.ts");
-    expect(result.stdout).not.toContain("app/routes.ts:");
+    // routes.ts is excluded by default and must not appear in the violations section
+    const [preamble, violations] = result.stdout.split("not wrapped in href()");
+    expect(preamble).toContain("app/routes.ts");
+    expect(violations).toContain("app/violations.ts");
+    expect(violations).not.toContain("app/routes.ts");
 
     // Exactly 4 violations — the safe counterparts are not flagged
     expect(result.stdout).toContain("Found 4 route path(s)");
