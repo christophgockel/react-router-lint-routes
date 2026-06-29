@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-06-29
+
 ### Fixed
 
 - The package is now shipping compiled JavaScript instead of raw TypeScript sources.
@@ -67,7 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Runtime guard in `extractPaths` to detect changes in React Router's JSON output shape
 
 
-[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.1.1...HEAD
+[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.2.0...HEAD
+[1.2.0]: https://github.com/christophgockel/react-router-lint-routes/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/christophgockel/react-router-lint-routes/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/christophgockel/react-router-lint-routes/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/christophgockel/react-router-lint-routes/releases/tag/1.0.0
