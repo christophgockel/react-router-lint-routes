@@ -1,6 +1,6 @@
 # react-router-lint-routes
 
-Lint route paths to enforce type-safe `href()` usage in React Router 7 projects.
+Lint route paths to enforce type-safe `href()` usage in React Router projects.
 
 Catches string literals, template literals, and string concatenations that match a known route path but are not wrapped in React Router's `href()` helper.
 Without `href()`, renaming or removing a route silently breaks navigation at runtime instead of failing at build time.
@@ -30,6 +30,8 @@ const path = "/products/" + id;       // flagged
 - Node.js >= 24.16.0
 - React Router >= 7.0.0
 - TypeScript >= 5.8.0
+
+Works with both the &ldquo;classic&rdquo; TypeScript compiler and the TypeScript 7 native compiler.
 
 
 ## Installation
