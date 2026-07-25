@@ -1,6 +1,6 @@
 {
   "name": "react-router-lint-routes",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Lint route paths to enforce type-safe href() usage in React Router 7 projects",
   "keywords": [
     "react-router",

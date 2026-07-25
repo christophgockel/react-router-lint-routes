@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-07-25
+
 ### Changed
 
 - Capped the supported `typescript` peer dependency range below 7 (`>=5.8.0 <7`).
@@ -75,7 +77,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Runtime guard in `extractPaths` to detect changes in React Router's JSON output shape
 
 
-[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.2.0...HEAD
+[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.2.1...HEAD
+[1.2.1]: https://github.com/christophgockel/react-router-lint-routes/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/christophgockel/react-router-lint-routes/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/christophgockel/react-router-lint-routes/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/christophgockel/react-router-lint-routes/compare/1.0.0...1.1.0
