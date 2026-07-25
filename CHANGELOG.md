@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-07-25
+
 ### Added
 
 - Support for TypeScript 7 projects.
@@ -87,7 +89,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Runtime guard in `extractPaths` to detect changes in React Router's JSON output shape
 
 
-[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.2.1...HEAD
+[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.3.0...HEAD
+[1.3.0]: https://github.com/christophgockel/react-router-lint-routes/compare/1.2.1...1.3.0
 [1.2.1]: https://github.com/christophgockel/react-router-lint-routes/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/christophgockel/react-router-lint-routes/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/christophgockel/react-router-lint-routes/compare/1.1.0...1.1.1
