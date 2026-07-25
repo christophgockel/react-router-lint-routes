@@ -1,3 +1,6 @@
 node_modules/
 *.tsbuildinfo
 dist/
+
+# E2E tests pack the tool into a tarball to install into the fixture project(s)
+test/e2e/*.tgz

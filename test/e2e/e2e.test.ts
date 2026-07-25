@@ -1,26 +1,49 @@
 import { execSync, spawnSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, rmSync } from "node:fs";
 import { resolve } from "node:path";
-import { beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-const fixturePath = resolve(import.meta.dirname, "fixture");
 const projectRoot = resolve(import.meta.dirname, "../..");
-const cliPath = resolve(projectRoot, "dist/main.js");
 
-function runCli(...args: string[]) {
-  return spawnSync("node", [cliPath, ...args], {
-    cwd: fixturePath,
+const fixtures = ["fixture"];
+
+let tarball: string;
+
+beforeAll(() => {
+  execSync("npm run build", { cwd: projectRoot, stdio: "pipe" });
+
+  const packed = execSync(`npm pack --pack-destination "${import.meta.dirname}"`, {
+    cwd: projectRoot,
     encoding: "utf-8",
   });
-}
+  tarball = resolve(import.meta.dirname, packed.trim().split("\n").pop() ?? "");
+}, 60_000);
 
-describe("End-to-End Tests", () => {
+afterAll(() => {
+  rmSync(tarball, { force: true });
+});
+
+describe.each(fixtures)("End-to-End Tests (%s)", (fixtureName) => {
+  const fixturePath = resolve(import.meta.dirname, fixtureName);
+  // Run the tool installed inside the fixture, so its `import "typescript"` resolves the
+  // fixture's own TypeScript rather than the project's.
+  const cliPath = resolve(fixturePath, "node_modules/react-router-lint-routes/dist/main.js");
+
+  function runCli(...args: string[]) {
+    return spawnSync("node", [cliPath, ...args], {
+      cwd: fixturePath,
+      encoding: "utf-8",
+    });
+  }
+
   beforeAll(() => {
-    execSync("npm run build", { cwd: projectRoot, stdio: "pipe" });
-
     if (!existsSync(resolve(fixturePath, "node_modules"))) {
       execSync("npm ci", { cwd: fixturePath, stdio: "pipe" });
     }
+
+    // --legacy-peer-deps bypasses the `<7` peer cap (needed by the TS7 fixture);
+    // --no-save leaves the fixture's package.json untouched.
+    execSync(`npm install "${tarball}" --no-save --legacy-peer-deps`, { cwd: fixturePath, stdio: "pipe" });
   }, 60_000);
 
   it("detects all violation types and ignores safe usage", () => {
