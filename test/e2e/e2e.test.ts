@@ -5,7 +5,11 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 
-const fixtures = ["fixture"];
+const fixtures = [
+  "fixture",
+  // skipping until we fully support TS7
+  // "fixture-ts7",
+];
 
 let tarball: string;
 
