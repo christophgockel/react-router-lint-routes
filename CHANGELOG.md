@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Capped the supported `typescript` peer dependency range below 7 (`>=5.8.0 <7`).
+  TypeScript 7's compiler API is not yet supported, so installing against it now fails fast instead of breaking at runtime.
+
+
 ## [1.2.0] - 2026-06-29
 
 ### Fixed

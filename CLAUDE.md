@@ -19,6 +19,15 @@ No `if` / early-return guards before assertions, no ternaries selecting which as
 If a value might be null, assert it isn't (`expect(x).not.toBeNull()`).
 A test that needs a branch has a bad setup, fix the setup.
 
+
+## Dependencies
+
+`typescript` is a peer dependency, capped to a supported major range (e.g. `>=5.8.0 <7`).
+Keep it a peer, never a bundled direct dependency.
+The tool parses the client's source with the client's own compiler, so the parser always matches the client's language level and cannot silently misread newer syntax.
+On a version break, cap the peer range so an unsupported major fails at install instead of running with results we cannot guarantee.
+
+
 ## Commands
 
 _Always_ use one of the following commands to run tasks.
