@@ -3,7 +3,11 @@ import { execSync } from "node:child_process";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
 import ts from "typescript";
+import { ClassicAdapter } from "./src/adapters/classic-adapter.ts";
+import { NativeAdapter } from "./src/adapters/native-adapter.ts";
+import type { CompilerAdapter } from "./src/compiler-adapter.ts";
 import { findViolations } from "./src/find-violations.ts";
+import type { LintSourceFile } from "./src/lint-ast.ts";
 import { createRouteMatcher, extractPaths } from "./src/route-matching.ts";
 
 const DEFAULT_DIRECTORY = "app";
@@ -60,19 +64,22 @@ try {
 const allRoutes = extractPaths(JSON.parse(routeJson));
 const matchesRoute = createRouteMatcher(allRoutes);
 
-// Build the TypeScript program
-const configPath = ts.findConfigFile(projectRoot, ts.sys.fileExists, values.tsconfig);
-if (!configPath) {
-  console.error(`Could not find ${values.tsconfig}`);
+// Pick the adapter that matches the client's TypeScript. The classic API exposes
+// createProgram; TypeScript 7's native port does not and serves the compiler API
+// from the unstable/* subpaths instead.
+const adapter = await selectAdapter(projectRoot, values.tsconfig);
+
+// Load the client's source and find violations
+let sourceFiles: LintSourceFile[];
+try {
+  sourceFiles = adapter.sourceFiles();
+} catch (error) {
+  console.error(error instanceof Error ? error.message : String(error));
   process.exit(2);
 }
 
-const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
-const parsedConfig = ts.parseJsonConfigFileContent(configFile.config, ts.sys, projectRoot);
-const program = ts.createProgram(parsedConfig.fileNames, parsedConfig.options);
-
 // Find and report violations
-const violations = findViolations(program, matchesRoute, directory, excludedFiles);
+const violations = findViolations(sourceFiles, matchesRoute, directory, excludedFiles);
 
 if (violations.length > 0) {
   console.log(
@@ -93,3 +100,20 @@ if (violations.length > 0) {
 }
 
 console.log("All route paths use href().");
+
+async function selectAdapter(projectRoot: string, tsconfigFileName: string): Promise<CompilerAdapter> {
+  if (typeof ts.createProgram === "function") {
+    return new ClassicAdapter(projectRoot, tsconfigFileName);
+  }
+
+  // TypeScript 7: load the native compiler API from the unstable/* subpaths. The
+  // specifiers are held in variables so this project's own tsc (6.x, which lacks
+  // those subpaths) does not try to resolve them. The resulting modules are untyped
+  // here; createNativeAdapter types them via the typescript-7 alias.
+  const syncSpecifier = "typescript/unstable/sync";
+  const astSpecifier = "typescript/unstable/ast";
+  const syncModule = await import(syncSpecifier);
+  const astModule = await import(astSpecifier);
+
+  return new NativeAdapter(syncModule.API, astModule, projectRoot, tsconfigFileName);
+}
