@@ -5,11 +5,19 @@
 Never write conversation context into code comments, documentation, or commit messages.
 If something only made sense because we just talked about it, it doesn't belong in the codebase.
 
+Comments must read correctly to someone seeing the file for the first time, with no knowledge of how it changed.
+Never describe the code as a change or in contrast to a past state: no "now", "no longer", "used to", "previously", "instead of", "anymore", "X is no longer needed".
+If a comment only makes sense as a diff against an earlier version, delete it.
+State what the code does and why it exists, not how it came to be.
+Git history is where change lives.
+
 Do not add unnecessary comments that explain obvious code.
 Only add comments if the reason for some line of code is unclear.
-When editing code, never remove existing comments.
-Only modify comments when the content does not reflect the behaviour or intent any more.
-Only delete comments when explicitly asked.
+Do not remove or reword a comment because you didn't write it, don't see why it's there, or think it's redundant.
+Assume it records a reason worth keeping.
+Change a comment only when the code it describes changed enough to make it wrong or misleading, or when the comment itself breaks these style rules.
+Then correct it, don't just drop it.
+Delete a comment outright only when explicitly asked, or when the code it described no longer exists.
 
 No type assertions.
 If the types don't fit, fix the design, but `as const` is always OK.
