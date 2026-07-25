@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for TypeScript 7 projects.
   The tool works against both the classic TypeScript compiler API (5.8–6.x) and the native TypeScript 7 API.
 
+### Changed
+
+- Widened the `typescript` peer dependency to `>=5.8.0` again, removing the `<7` cap.
+
 
 ## [1.2.1] - 2026-07-25
 

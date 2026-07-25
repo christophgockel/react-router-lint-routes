@@ -5,11 +5,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 
-const fixtures = [
-  "fixture",
-  // skipping until we fully support TS7
-  // "fixture-ts7",
-];
+const fixtures = ["fixture", "fixture-ts7"];
 
 let tarball: string;
 
@@ -45,9 +41,8 @@ describe.each(fixtures)("End-to-End Tests (%s)", (fixtureName) => {
       execSync("npm ci", { cwd: fixturePath, stdio: "pipe" });
     }
 
-    // --legacy-peer-deps bypasses the `<7` peer cap (needed by the TS7 fixture);
     // --no-save leaves the fixture's package.json untouched.
-    execSync(`npm install "${tarball}" --no-save --legacy-peer-deps`, { cwd: fixturePath, stdio: "pipe" });
+    execSync(`npm install "${tarball}" --no-save`, { cwd: fixturePath, stdio: "pipe" });
   }, 60_000);
 
   it("detects all violation types and ignores safe usage", () => {
