@@ -63,6 +63,7 @@ The known routes are fetched from `npx react-router routes --json` at lint time 
 `routes.ts` is excluded by default because it contains route declarations, not navigation targets.
 Paths are relative to the scan directory, so `--exclude path/to/config.ts` skips `app/path/to/config.ts`.
 
+
 ### Examples
 
 ```sh
@@ -105,7 +106,9 @@ without having to specify your project-specific settings every time.
 Static routes are matched exactly.
 Parameterised routes (e.g. `/products/:id`) are matched by prefix, so both `"/products/abc"` and `` `/products/${id}` `` are caught.
 
-The root path `"/"` is excluded from checks. It appears frequently in non-route contexts (path construction, URL manipulation) where flagging it would produce false positives. It also cannot be renamed the way other routes can, so `href("/")` provides minimal type-safety benefit in practice.
+The root path `"/"` is excluded from checks.
+It appears frequently in non-route contexts (path construction, URL manipulation) where flagging it would produce false positives.
+It also cannot be renamed the way other routes can, so `href("/")` provides minimal type-safety benefit in practice.
 
 
 ## License
