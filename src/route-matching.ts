@@ -1,8 +1,7 @@
 // Minimal representation of a route from `react-router routes --json`.
 // A route is either a leaf with a path, a layout with children, or both.
 // React Router does not export a type for its CLI output, so we define
-// only the fields we need and rely on a runtime guard in extractPaths()
-// to detect shape changes.
+// only the fields we need.
 export type Route = { path: string; children?: Route[] } | { path?: never; children: Route[] };
 
 export function extractPaths(routes: Route[]): string[] {
@@ -16,13 +15,6 @@ export function extractPaths(routes: Route[]): string[] {
     if (route.children) {
       paths.push(...extractPaths(route.children));
     }
-  }
-
-  if (routes.length > 0 && paths.length === 0) {
-    throw new Error(
-      "react-router routes --json returned routes but no paths were extracted. " +
-        "The JSON shape may have changed. Check that route objects still use 'path' and 'children' fields.",
-    );
   }
 
   return paths;

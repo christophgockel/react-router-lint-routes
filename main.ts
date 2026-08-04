@@ -62,6 +62,12 @@ try {
 }
 
 const allRoutes = extractPaths(JSON.parse(routeJson));
+
+if (allRoutes.length === 0) {
+  console.log("No routes found, nothing to check.");
+  process.exit(0);
+}
+
 const matchesRoute = createRouteMatcher(allRoutes);
 
 // Pick the adapter that matches the client's TypeScript. The classic API exposes

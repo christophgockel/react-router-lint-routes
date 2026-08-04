@@ -2,11 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
 ## [Unreleased]
+
+### Fixed
+
+- Projects with no routes defined and related cases no longer crash.
+  Running the tool against a fresh project that has not declared any routes yet used to throw `react-router routes --json returned routes but no paths were extracted`.
+  The same crash happened for a layout route whose only child was an index route (`index()`, which has no path).
+  The tool now prints `No routes found, nothing to check.` for an empty project and exits successfully.
+
+
+### Removed
+
+- The runtime guard in `extractPaths` that tried to detect changes in React Router's JSON output shape.
+  It could not tell a genuine shape change apart from a project that simply has no routes, so it reported valid empty projects as errors.
+
 
 ## [1.3.0] - 2026-07-25
 
@@ -14,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support for TypeScript 7 projects.
   The tool works against both the classic TypeScript compiler API (5.8–6.x) and the native TypeScript 7 API.
+
 
 ### Changed
 

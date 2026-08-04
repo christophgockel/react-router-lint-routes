@@ -37,13 +37,13 @@ describe("extractPaths", () => {
     expect(extractPaths(routes)).toEqual(["/login"]);
   });
 
-  it("throws when routes exist but no paths are extracted", () => {
+  it("returns an empty array when routes exist but have no paths", () => {
     const routes: Route[] = [{ children: [{ children: [] }] }];
 
-    expect(() => extractPaths(routes)).toThrow("no paths were extracted");
+    expect(extractPaths(routes)).toEqual([]);
   });
 
-  it("returns an empty array for an empty input without throwing", () => {
+  it("returns an empty array for an empty input", () => {
     expect(extractPaths([])).toEqual([]);
   });
 });
