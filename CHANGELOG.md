@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-08-04
+
 ### Fixed
 
 - Projects with no routes defined and related cases no longer crash.
@@ -103,7 +105,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - Runtime guard in `extractPaths` to detect changes in React Router's JSON output shape
 
 
-[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.3.0...HEAD
+[Unreleased]: https://github.com/christophgockel/react-router-lint-routes/compare/1.3.1...HEAD
+[1.3.1]: https://github.com/christophgockel/react-router-lint-routes/compare/1.3.0...1.3.1
 [1.3.0]: https://github.com/christophgockel/react-router-lint-routes/compare/1.2.1...1.3.0
 [1.2.1]: https://github.com/christophgockel/react-router-lint-routes/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/christophgockel/react-router-lint-routes/compare/1.1.1...1.2.0
